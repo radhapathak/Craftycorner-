@@ -1,11 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="utf-8">
 <title>Craftycorner</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="images/logo.jpg">
-<meta name="description" content="Handmade candles and everlasting flowers, made in small batches and ordered over WhatsApp.">
+<meta name="description" content="Handmade candles, everlasting flowers, jewellery, wedding pieces and pipe cleaner crafts, ordered over WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
 <style>
+
   /* Layout: a craft table. Grainy paper ground, taped polaroids in the hero,
      products hung as gift tags on thread, stitched dashed borders as the recurring detail. */
   :root{
@@ -178,83 +180,249 @@
   .toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,120px);background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:99px;transition:transform .3s;z-index:50;font-weight:600}
   .toast.show{transform:translate(-50%,0)}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.card:hover{animation:none}*{transition:none!important}}
+
+  /* ---- multi-page additions ---- */
+  a.chip{text-decoration:none;display:inline-flex;align-items:center}
+  a.chip.on{background:var(--ink);color:var(--paper)}
+  a.add{display:block;text-align:center;text-decoration:none}
+  .navlinks{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center}
+  .navlinks a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+  .img.ph,.ci.ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--paper-2),var(--card));color:var(--muted);font-family:var(--hand);font-size:1.3rem}
+  .cat-grid,#catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+  .cat-card{display:block;background:var(--card);border-radius:var(--r);overflow:hidden;border:1px dashed var(--line);box-shadow:0 10px 24px -16px var(--shadow)}
+  .cat-card .ci{aspect-ratio:4/3;background-size:cover;background-position:center}
+  .cat-card .cb{padding:16px 18px 20px}
+  .cat-card h3{font-size:1.25rem}
+  .cat-card p{color:var(--muted);font-size:.95rem;margin-top:4px}
+  .cat-card small{display:block;margin-top:10px;color:var(--thread);font-weight:700}
+  .crumbs{font-size:.92rem;color:var(--muted);margin-bottom:10px}
+  .crumbs a,.under{text-decoration:underline;text-underline-offset:3px}
+  .page-head{text-align:center;padding-block:56px 24px}
+  .page-head h1{font-size:clamp(2rem,5vw,3rem)}
+  .page-head p{color:var(--muted);max-width:620px;margin:12px auto 0}
+  .prose{max-width:740px;margin:0 auto}
+  .prose h2{font-size:1.7rem;margin-top:40px}
+  .prose p{margin-top:14px;font-size:1.05rem}
+  .prose ul{margin:14px 0 0 20px;font-size:1.05rem}
+  .prose li{margin-top:6px}
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:900px;margin:0 auto}
+  @media (min-width:820px){.contact-grid{grid-template-columns:1fr 1.2fr;align-items:start}}
+  .wa-card{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center}
+  .wa-card .hand{font-size:1.6rem;color:var(--thread)}
+  .wa-card p{margin-top:10px;color:var(--muted)}
+  .wa-card .btn{margin-top:18px;display:inline-block}
+  .foot-links{margin:10px 0 14px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .foot-links a{text-decoration:underline;text-underline-offset:3px}
+  #tools[hidden]{display:none}
+  @media (max-width:640px){.navlinks{gap:4px 12px;font-size:.92rem}.page-head{padding-block:40px 16px}}
+
+  /* ---- one-page site additions ---- */
+  .view[hidden]{display:none!important}
+  .motto{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px;background:var(--ink);color:var(--paper);font-family:var(--display);font-size:1.05rem;text-align:center}
+  .motto b{color:var(--mustard);font-weight:400}
+  .motto a{text-decoration:underline;text-underline-offset:4px}
+  a.chip{text-decoration:none;display:inline-flex;align-items:center}
+  a.chip.on{background:var(--ink);color:var(--paper)}
+  a.add{display:block;text-align:center;text-decoration:none}
+  .navlinks{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center}
+  .navlinks a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+  .img.ph,.ci.ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--paper-2),var(--card));color:var(--muted);font-family:var(--hand);font-size:1.3rem}
+  #catgrid,#homecats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+  .cat-card{display:block;background:var(--card);border-radius:var(--r);overflow:hidden;border:1px dashed var(--line);box-shadow:0 10px 24px -16px var(--shadow)}
+  .cat-card .ci{aspect-ratio:4/3;background-size:cover;background-position:center}
+  .cat-card .cb{padding:16px 18px 20px}
+  .cat-card h3{font-size:1.25rem}
+  .cat-card p{color:var(--muted);font-size:.95rem;margin-top:4px}
+  .cat-card small{display:block;margin-top:10px;color:var(--thread);font-weight:700}
+  .crumbs{font-size:.92rem;color:var(--muted);margin-bottom:10px}
+  .crumbs a,.under{text-decoration:underline;text-underline-offset:3px}
+  .page-head{text-align:center;padding-block:56px 24px}
+  .page-head h1{font-size:clamp(2rem,5vw,3rem)}
+  .page-head p{color:var(--muted);max-width:620px;margin:12px auto 0}
+  .prose{max-width:740px;margin:0 auto}
+  .prose h2{font-size:1.7rem;margin-top:40px}
+  .prose p{margin-top:14px;font-size:1.05rem}
+  .prose ul{margin:14px 0 0 20px;font-size:1.05rem}
+  .prose li{margin-top:6px}
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:900px;margin:0 auto}
+  @media (min-width:820px){.contact-grid{grid-template-columns:1fr 1.2fr;align-items:start}}
+  .wa-card{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center}
+  .wa-card .hand{font-size:1.6rem;color:var(--thread)}
+  .wa-card p{margin-top:10px;color:var(--muted)}
+  .wa-card .btn{margin-top:18px;display:inline-block}
+  .foot-links{margin:10px 0 14px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .foot-links a{text-decoration:underline;text-underline-offset:3px}
+  .howbox{max-width:720px;margin:36px auto 0;text-align:center}
+  .howbox .btn{margin-top:16px}
+  #tools[hidden]{display:none}
+  .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:30;display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+  .fab svg{width:20px;height:20px;fill:#fff}
+
+  /* ---- black handmade theme: home, categories, how it works ---- */
+  body.noir{
+    --paper:#0c0a08; --paper-2:#17120e; --card:#1d1813;
+    --ink:#f4e9d4; --muted:#bdaa8e; --line:#6b5540;
+    --thread:#e2634a; --on-thread:#1a0b06;
+    --indigo:#d8c08f; --on-indigo:#15110c;
+    --mustard:#e6b25a; --on-mustard:#15110c; --tape:rgba(230,178,90,.7);
+    --shadow:rgba(0,0,0,.75); --logo-blend:normal; --logo-bg:#fff;
+    color-scheme:dark;
+    background-color:var(--paper);
+    background-image:radial-gradient(ellipse at 50% -12%, rgba(226,99,74,.20), transparent 60%), var(--grain);
+  }
+  body.noir .kicker{color:var(--mustard)}
+  body.noir .hero h1, body.noir h2{color:var(--ink)}
+  body.noir .card,body.noir .cat-card,body.noir .wa-card{border-color:#6b5540;background:linear-gradient(180deg,#221b15,#1a150f)}
+  body.noir .card{outline:1px dashed #6b5540;outline-offset:-7px}
+  body.noir .cat-card{outline:1px dashed #6b5540;outline-offset:-7px}
+  body.noir .motto{background:#1d1813;color:var(--ink);border-bottom:1px dashed #6b5540}
+  body.noir .motto b{color:var(--mustard)}
+  body.noir .step{background:#1d1813;outline:1px dashed #6b5540;outline-offset:-8px}
+  body.noir .add,body.noir .btn{box-shadow:0 4px 0 #7a2a1d}
+  @media (max-width:640px){.navlinks{gap:4px 12px;font-size:.92rem}.page-head{padding-block:40px 16px}}
+
 </style>
 <header class="top">
   <div class="wrap bar">
-    <a href="#top" class="logo" aria-label="Crafty Corner home"><img src="images/logo.jpg" alt="Crafty Corner logo" width="84" height="84"></a>
-    <nav aria-label="Main"><a href="#shop">Shop</a><a href="#how">How it works</a><a href="#custom">Custom orders</a></nav>
+    <a href="#home" class="logo" aria-label="Craftycorner home"><img src="images/logo.jpg" alt="Craftycorner logo" width="84" height="84"></a>
+    <nav aria-label="Main" class="navlinks"><a href="#home" data-nav="home">Home</a><a href="#categories" data-nav="categories">Categories</a><a href="#how" data-nav="how">How it works</a><a href="#about" data-nav="about">About us</a><a href="#contact" data-nav="contact">Contact us</a></nav>
     <button class="cart-btn" id="openCart" aria-label="Open cart">Cart <b id="count">0</b></button>
   </div>
 </header>
+<div class="motto">Order on WhatsApp <b>·</b> handmade by us <b>·</b> delivered to you</div>
+<main>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <span class="kicker">candles · flowers · small batches</span>
-        <h1>Made slowly, <span class="squig">by hand<svg viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7c12-8 20 6 32-1s20 5 32-1 20 5 32-1 20 5 32-1 20 5 36 0"/></svg></span>, then posted to you.</h1>
-        <p>Soy wax candles set with dried petals, and everlasting flowers that never wilt. Pick what you like, send the order on WhatsApp, and we make and pack it for you.</p>
-        <div class="cta"><a href="#shop" class="btn">Browse the shelf</a><a href="#custom" class="btn ghost">Ask for a custom piece</a></div>
-      </div>
-      <div class="collage">
-        <figure class="polaroid p1"><img src="images/candles.jpg" alt="Pouring soy wax into a glass jar with dried rose petals" width="1536" height="1024"><figcaption>poured by hand</figcaption></figure>
-        <figure class="polaroid p2"><img src="images/flowers.jpg" alt="A table of pink and white flowers being arranged into bouquets" width="1536" height="1024"><figcaption>arranged by hand</figcaption></figure>
-        <div class="stamp" aria-hidden="true">100% handmade</div>
-      </div>
+<section data-view="home" class="view">
+  <div class="hero"><div class="wrap">
+    <div>
+      <span class="kicker">handmade candles · flowers · jewellery</span>
+      <h1>Made slowly, <span class="squig">by hand<svg viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7c12-8 20 6 32-1s20 5 32-1 20 5 32-1 20 5 32-1 20 5 36 0"/></svg></span>, then sent to you.</h1>
+      <p>Choose what you like, send your order on WhatsApp, and we make and pack it for you. No account, no card on the site. Just a chat.</p>
+      <div class="cta"><a href="#categories" class="btn">Browse categories</a><a href="#contact" class="btn ghost">Ask for a custom piece</a></div>
     </div>
-  </section>
+    <div class="collage">
+      <figure class="polaroid p1"><img src="images/candles.jpg" alt="Pouring soy wax into a glass jar with dried rose petals" width="1536" height="1024"><figcaption>poured by hand</figcaption></figure>
+      <figure class="polaroid p2"><img src="images/flowers.jpg" alt="A table of pink and white flowers being arranged into bouquets" width="1536" height="1024"><figcaption>arranged by hand</figcaption></figure>
+      <div class="stamp" aria-hidden="true">100% handmade</div>
+    </div>
+  </div></div>
 
-  <section id="shop" style="padding-top:24px">
-    <div class="wrap">
-      <div class="head"><span class="kicker">the shelf</span><h2>Hung up and ready to take home</h2><p>Every tag is one piece or one bunch. Add it to your cart and order on WhatsApp.</p></div>
-      <div class="tools">
-        <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
-        <input class="search" id="q" type="search" placeholder="Search the shelf…" aria-label="Search products">
-      </div>
-      <div class="grid" id="grid"></div>
-    </div>
-  </section>
+  <section style="padding-top:24px"><div class="wrap">
+    <div class="head"><span class="kicker">shop by category</span><h2>Find what you are looking for</h2></div>
+    <div id="homecats"></div>
+  </div></section>
 
-  <section class="torn" id="how">
-    <div class="wrap">
-      <div class="head"><span class="kicker">how it works</span><h2>From your cart to your door</h2></div>
-      <div class="steps">
-        <div class="step"><span class="n">1</span><h3>Pick your pieces</h3><p>Fill the cart with candles and flowers you like. Change quantities anytime.</p></div>
-        <div class="step"><span class="n">2</span><h3>Send it on WhatsApp</h3><p>One tap opens a message with your items and total. Add your name and address.</p></div>
-        <div class="step"><span class="n">3</span><h3>We make and pack it</h3><p>We confirm the price and delivery time, then make it, wrap it and send it.</p></div>
-      </div>
-    </div>
-  </section>
+  <section class="torn" style="padding-block:72px"><div class="wrap">
+    <div class="head"><span class="kicker">favourites</span><h2>Hung up and ready to take home</h2><p>Add what you like to your cart, then order on WhatsApp.</p></div>
+    <div class="grid" id="featured"></div>
+  </div></section>
 
-  <section>
-    <div class="wrap">
-      <div class="promise">
-        <div><h3>Soy wax, wooden wicks</h3><p>Clean-burning candles set with real dried petals.</p></div>
-        <div><h3>Flowers that stay</h3><p>Everlasting blooms that keep their colour in a vase.</p></div>
-        <div><h3>Gift ready</h3><p>Ask for a note and we wrap it for you.</p></div>
-      </div>
-    </div>
-  </section>
+  <section><div class="wrap"><div class="howbox">
+    <span class="kicker">how it works</span>
+    <h2>Three steps, all on WhatsApp</h2>
+    <p>Pick your pieces, send the order, and we confirm and deliver.</p>
+    <a class="btn" href="#how">See how it works</a>
+  </div></div></section>
+</section>
 
-  <section class="custom torn" id="custom">
-    <div class="wrap">
-      <div>
-        <span class="kicker">made just for you</span>
-        <h2>Want a different scent, colour or a big gift order?</h2>
-        <p>Tell us what you have in mind: a wedding favour, a birthday set, a colour to match your room. We will reply on WhatsApp with ideas and a price.</p>
-      </div>
-      <form id="contactForm" novalidate>
-        <div><label for="fname">Your name</label><input id="fname" name="name" required autocomplete="name"></div>
-        <div><label for="fphone">Phone / WhatsApp</label><input id="fphone" name="phone" required inputmode="tel" autocomplete="tel"></div>
-        <div><label for="fmsg">What should we make?</label><textarea id="fmsg" name="msg" required placeholder="For example: 20 small rose candles for a wedding, in pale pink"></textarea></div>
-        <a class="btn" id="sendMsg" target="_blank" rel="noopener">Send on WhatsApp</a>
-        <p class="alt">If WhatsApp does not open, message <b class="num"></b> and <button type="button" id="copyMsg">copy this message</button> to paste.</p>
-      </form>
+
+<section data-view="categories" class="view" hidden>
+  <div class="page-head"><div class="wrap">
+    <span class="kicker">the shop</span>
+    <h1>All categories</h1>
+    <p>Choose a range to see what is available. Anything you do not see, ask us on WhatsApp.</p>
+  </div></div>
+  <section style="padding-top:8px"><div class="wrap"><div id="catgrid"></div></div></section>
+  <section style="padding-top:28px"><div class="wrap" style="text-align:center">
+    <p>Want something that is not listed? <a class="under" href="#contact">Contact us</a>.</p>
+  </div></section>
+</section>
+
+
+<section data-view="category" class="view" hidden>
+  <div class="page-head" style="padding-bottom:8px"><div class="wrap"><div id="cat-head"></div></div></div>
+  <section style="padding-top:12px"><div class="wrap">
+    <div class="tools" id="tools">
+      <div class="chips" id="switch" role="group" aria-label="Other categories"></div>
+      <input class="search" id="q" type="search" placeholder="Search this category…" aria-label="Search products">
     </div>
-  </section>
+    <div class="grid" id="grid"></div>
+  </div></section>
+  <section style="padding-top:40px"><div class="wrap" style="text-align:center">
+    <p>Want a custom piece in this range? <a class="under" href="#contact">Ask us on WhatsApp</a>.</p>
+  </div></section>
+</section>
+
+
+<section data-view="how" class="view" hidden>
+  <div class="page-head"><div class="wrap">
+    <span class="kicker">how it works</span>
+    <h1>Order in four steps</h1>
+    <p>Ordering happens on WhatsApp. There is nothing to sign up for.</p>
+  </div></div>
+  <section style="padding-top:8px"><div class="wrap"><div class="steps">
+    <div class="step"><span class="n">1</span><h3>Pick your pieces</h3><p>Browse a category and press “Add to cart” on anything you like. Change quantities any time.</p></div>
+    <div class="step"><span class="n">2</span><h3>Order on WhatsApp</h3><p>Press “Order on WhatsApp”. A chat opens with your items and total already written. Add your name and delivery address.</p></div>
+    <div class="step"><span class="n">3</span><h3>We confirm</h3><p>We reply on WhatsApp with the final price and delivery time before we start.</p></div>
+    <div class="step"><span class="n">4</span><h3>We make and deliver</h3><p>We make it by hand, pack it, and send it to you.</p></div>
+  </div>
+  <div class="howbox"><p>Want something made just for you? Tell us what you have in mind.</p>
+    <a class="btn" href="#contact">Ask us on WhatsApp</a></div>
+  </div></section>
+</section>
+
+
+<section data-view="about" class="view" hidden>
+  <div class="page-head"><div class="wrap">
+    <span class="kicker">about us</span>
+    <h1>Small batches, made by hand</h1>
+  </div></div>
+  <section style="padding-top:8px"><div class="wrap"><div class="prose">
+    <p>Craftycorner makes handmade things in small batches: soy wax candles set with dried petals, everlasting flowers, jewellery, wedding pieces and pipe cleaner crafts.</p>
+    <p>Every piece is made by hand, so no two are exactly the same. We would rather make a few things carefully than many things in a hurry.</p>
+    <h2>What we make</h2>
+    <ul>
+      <li><a class="under" href="#category-candles">Candles</a>: soy wax, wooden wicks, real dried petals.</li>
+      <li><a class="under" href="#category-flowers">Flowers</a>: everlasting blooms and bouquets that keep their colour.</li>
+      <li><a class="under" href="#category-jewellery">Jewellery</a>: resin, flower and pearl pieces.</li>
+      <li><a class="under" href="#category-wedding-jewellery">Wedding jewellery</a>: bridal pieces, made to your colours.</li>
+      <li><a class="under" href="#category-pipe-cleaner">Pipe cleaner crafts</a>: handmade decor and gifts.</li>
+    </ul>
+    <h2>How we work</h2>
+    <p>You order on WhatsApp. We confirm the price and delivery time before we make anything, so there are no surprises. <a class="under" href="#how">See the steps</a>.</p>
+    <h2>Talk to us</h2>
+    <p><a class="under" href="#contact">Contact us</a> any time, or message us on WhatsApp.</p>
+  </div></div></section>
+</section>
+
+
+<section data-view="contact" class="view" hidden>
+  <div class="page-head"><div class="wrap">
+    <span class="kicker">contact us</span>
+    <h1>Let's talk</h1>
+    <p>Ask us anything, or tell us what you would like made. We reply on WhatsApp.</p>
+  </div></div>
+  <section style="padding-top:8px"><div class="wrap"><div class="contact-grid">
+    <div class="wa-card">
+      <span class="hand">message us on WhatsApp</span>
+      <p>Chat with us directly, or send an order. Our number is <b class="num"></b>.</p>
+      <a class="btn" target="_blank" rel="noopener" href="https://wa.me/919021400232?text=Hi%20Craftycorner!">Open WhatsApp chat</a>
+    </div>
+    <form id="contactForm" novalidate onsubmit="return false">
+      <div><label for="fname">Your name</label><input id="fname" name="name" autocomplete="name"></div>
+      <div><label for="fphone">Phone / WhatsApp</label><input id="fphone" name="phone" inputmode="tel" autocomplete="tel"></div>
+      <div><label for="fmsg">What would you like?</label><textarea id="fmsg" name="msg" placeholder="For example: 20 small rose candles for a wedding, in pale pink"></textarea></div>
+      <a class="btn" id="sendMsg" target="_blank" rel="noopener">Send on WhatsApp</a>
+      <p class="alt">If WhatsApp does not open, message <b class="num"></b> and <button type="button" id="copyMsg">copy this message</button> to paste.</p>
+    </form>
+  </div></div></section>
+</section>
+
 </main>
-
-<footer><img class="foot-logo" src="images/logo.jpg" alt="" width="180" height="180"><div class="hand">thank you for supporting small makers</div>© <span id="yr"></span> Craftycorner</footer>
+<footer><img class="foot-logo" src="images/logo.jpg" alt="" width="180" height="180"><div class="hand">thank you for supporting small makers</div>
+<nav class="foot-links"><a href="#categories">Categories</a><a href="#how">How it works</a><a href="#about">About us</a><a href="#contact">Contact us</a></nav>
+© <span id="yr"></span> Craftycorner</footer>
+<a class="fab" id="fwa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.4l-.7-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.7 11.5 11.5 0 0 0 4.4 3.9c2.1.9 2.5.7 3 .7a2.6 2.6 0 0 0 1.7-1.2 2 2 0 0 0 .2-1.2c0-.1-.2-.2-.4-.3z"/></svg>Order on WhatsApp</a>
 
 <div id="veil"></div>
 <aside id="drawer" aria-label="Shopping cart">
@@ -267,115 +435,190 @@
   </div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
-
 <script>
 /* ====== EDIT THESE ====== */
 const WHATSAPP = "919021400232";   // your number with country code, no + or spaces
 const CURRENCY = "₹";
 /* ======================== */
 
-/* Products: add / edit freely. crop = [photo, x, y, zoom] picks the spot in the photo to show */
-const C="images/candles.jpg", F="images/flowers.jpg";
-const products = [
-  {id:1,cat:"Candles",name:"Dried Flower Soy Candle",desc:"Rose and chamomile set in soy wax, wooden wick.",price:449,crop:[C,.735,.56,3.2]},
-  {id:2,cat:"Candles",name:"Blush Rose Petal Candle",desc:"Rose-shaped pink candle with gold-edged petals and dried rose petals.",price:399,photo:"images/rose-candle.jpg"},
-  {id:3,cat:"Candles",name:"Bubble Cube Candle",desc:"Sculpted cream candle, a pretty shelf piece.",price:349,crop:[C,.91,.64,3.2]},
-  {id:4,cat:"Candles",name:"Scalloped Tea-light Candle",desc:"Flower-shaped candles in soft colours with dried petals and gold foil.",price:249,photo:"images/scalloped.jpg"},
-  {id:5,cat:"Flowers",name:"Pastel Bouquet in Vase",desc:"Roses and blossoms in a ribbed ceramic vase.",price:899,crop:[F,.22,.38,2.8]},
-  {id:6,cat:"Flowers",name:"Sunflower Bunch",desc:"Bright sunflowers with filler flowers.",price:549,crop:[F,.47,.3,3.4]},
-  {id:7,cat:"Flowers",name:"White Blossom Stems",desc:"Tall airy stems for a glass vase.",price:649,crop:[F,.75,.3,3]},
-  {id:8,cat:"Flowers",name:"Pink Dahlia Stems",desc:"Soft pink dahlias with green leaves.",price:399,crop:[F,.89,.74,3.4]},
-  {id:9,cat:"Candle Stands",name:"Pipe Cleaner Candle Stand",desc:"Handmade pipe cleaner doll with a flower arch and pearl-trimmed tea-lights on a gold tray.",price:1499,photo:"images/candle-stand.jpg"},
-  {id:10,cat:"Jewellery",name:"Floral Necklace Set",desc:"Pink resin flower necklace with matching drop earrings, pearls and gold leaves.",price:1299,photo:"images/necklace-set.jpg"}
+/* Categories: slug must match each product's "cat". */
+const CATS = [
+  {slug:"candles", name:"Candles", blurb:"Soy wax candles set with dried petals and gold foil."},
+  {slug:"flowers", name:"Flowers", blurb:"Everlasting flowers and bouquets that keep their colour in a vase."},
+  {slug:"jewellery", name:"Jewellery", blurb:"Handmade resin, flower and pearl pieces."},
+  {slug:"wedding-jewellery", name:"Wedding Jewellery", blurb:"Bridal and wedding pieces, made to order."},
+  {slug:"pipe-cleaner", name:"Pipe Cleaner Crafts", blurb:"Handmade pipe cleaner decor and gifts."}
 ];
-const cats = ["All","Candles","Flowers","Candle Stands","Jewellery"];
 
-/* shows a zoomed-in part of a photo inside a square box */
-function look(p){
-  if(p.photo) return `background-image:url(${p.photo});background-size:cover;background-position:center`;
-  const [src,fx,fy,S]=p.crop, ar=1024/1536, bw=S, bh=S*ar;
-  const cl=v=>Math.min(100,Math.max(0,v));
-  const px=cl((bw*fx-.5)/(bw-1)*100), py=cl((bh*fy-.5)/(bh-1)*100);
-  return `background-image:url(${src});background-position:${px}% ${py}%;background-size:${S*100}% auto`;
-}
+/* price null = "On request" (asks on WhatsApp, no cart).
+   crop = [photo, x, y, zoom]; photo = whole image; neither = "Photo coming soon". */
+const C = "images/candles.jpg", F = "images/flowers.jpg";
+const PRODUCTS = [
+  {id:1, cat:"candles", name:"Dried Flower Soy Candle", desc:"Rose and chamomile set in soy wax, wooden wick.", price:449, crop:[C,.735,.56,3.2]},
+  {id:2, cat:"candles", name:"Blush Rose Petal Candle", desc:"Rose-shaped pink candle with gold-edged petals and dried rose petals.", price:399, photo:"images/rose-candle.jpg"},
+  {id:3, cat:"candles", name:"Bubble Cube Candle", desc:"Sculpted cream candle, a pretty shelf piece.", price:349, crop:[C,.91,.64,3.2]},
+  {id:4, cat:"candles", name:"Scalloped Tea-light Candle", desc:"Flower-shaped candles in soft colours with dried petals and gold foil.", price:249, photo:"images/scalloped.jpg"},
+  {id:5, cat:"flowers", name:"Pastel Bouquet in Vase", desc:"Roses and blossoms in a ribbed ceramic vase.", price:899, crop:[F,.22,.38,2.8]},
+  {id:6, cat:"flowers", name:"Sunflower Bunch", desc:"Bright sunflowers with filler flowers.", price:549, crop:[F,.47,.3,3.4]},
+  {id:7, cat:"flowers", name:"White Blossom Stems", desc:"Tall airy stems for a glass vase.", price:649, crop:[F,.75,.3,3]},
+  {id:8, cat:"flowers", name:"Pink Dahlia Stems", desc:"Soft pink dahlias with green leaves.", price:399, crop:[F,.89,.74,3.4]},
+  {id:9, cat:"pipe-cleaner", name:"Pipe Cleaner Candle Stand", desc:"Handmade pipe cleaner doll with a flower arch and pearl-trimmed tea-lights on a gold tray.", price:1499, photo:"images/candle-stand.jpg"},
+  {id:10, cat:"jewellery", name:"Floral Necklace Set", desc:"Pink resin flower necklace with matching drop earrings, pearls and gold leaves.", price:1299, photo:"images/necklace-set.jpg"},
+  {id:11, cat:"wedding-jewellery", name:"Bridal Pearl Necklace", desc:"Pearls and a gold-tone chain, made to match your wedding colours.", price:null},
+  {id:12, cat:"wedding-jewellery", name:"Wedding Flower Earrings", desc:"Small floral drop earrings to go with bridal outfits.", price:null}
+];
 
 const $ = s => document.querySelector(s);
 const money = n => CURRENCY + n.toLocaleString("en-IN");
+const catOf = slug => CATS.find(c => c.slug === slug);
+const wa = msg => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+const waNumber = "+" + WHATSAPP.slice(0, 2) + " " + WHATSAPP.slice(2);
+const hasPhoto = p => !!(p.photo || p.crop);
+
+function look(p){
+  if(p.photo) return `background-image:url(${p.photo});background-size:cover;background-position:center`;
+  if(!p.crop) return "";
+  const [src,fx,fy,S] = p.crop, ar = 1024/1536, bw = S, bh = S*ar;
+  const cl = v => Math.min(100, Math.max(0, v));
+  const px = cl((bw*fx-.5)/(bw-1)*100), py = cl((bh*fy-.5)/(bh-1)*100);
+  return `background-image:url(${src});background-position:${px}% ${py}%;background-size:${S*100}% auto`;
+}
+
+function card(p){
+  const img = hasPhoto(p)
+    ? `<div class="img" role="img" aria-label="${p.name}" style="${look(p)}"></div>`
+    : `<div class="img ph" role="img" aria-label="${p.name}, photo coming soon"><span>Photo coming soon</span></div>`;
+  const price = p.price == null ? "On request" : money(p.price);
+  const action = p.price == null
+    ? `<a class="add" target="_blank" rel="noopener" href="${wa("Hi Craftycorner! I'd like to ask about: " + p.name)}">Ask on WhatsApp</a>`
+    : `<button class="add" data-id="${p.id}">Add to cart</button>`;
+  return `<article class="card"><div class="img-wrap">${img}<span class="price">${price}</span></div>
+    <span class="tag">${catOf(p.cat).name}</span><h3>${p.name}</h3><p>${p.desc}</p>${action}</article>`;
+}
+function renderGrid(el, list){
+  el.innerHTML = list.length ? list.map(card).join("")
+    : `<p class="none">Nothing matches that yet. Try another word, or ask us for a custom piece.</p>`;
+}
+function catTile(c){
+  const items = PRODUCTS.filter(p => p.cat === c.slug);
+  const thumb = items.find(hasPhoto);
+  return `<a class="cat-card" href="#category-${c.slug}">
+    <div class="ci ${thumb ? "" : "ph"}" ${thumb ? `style="${look(thumb)}"` : ""}>${thumb ? "" : "<span>Photo coming soon</span>"}</div>
+    <div class="cb"><h3>${c.name}</h3><p>${c.blurb}</p><small>${items.length} ${items.length === 1 ? "item" : "items"} →</small></div></a>`;
+}
+
+/* ---------- cart ---------- */
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("cc_cart")) || []; } catch(e){}
-const save = () => { try{ localStorage.setItem("cc_cart", JSON.stringify(cart)); }catch(e){} };
-
-/* shelf */
-let current = "All", query = "";
-function renderChips(){
-  $("#chips").innerHTML = cats.map(n=>{
-    const k = n==="All" ? products.length : products.filter(p=>p.cat===n).length;
-    return `<button class="chip ${n===current?"on":""}" data-c="${n}" aria-pressed="${n===current}">${n}<small>${k}</small></button>`;
-  }).join("");
+function saveCart(){ try { localStorage.setItem("cc_cart", JSON.stringify(cart)); } catch(e){} }
+const priced = () => cart.map(l => ({p: PRODUCTS.find(p => p.id === l.id), q: l.q})).filter(r => r.p && r.p.price != null);
+function addToCart(id){
+  const l = cart.find(i => i.id === id);
+  l ? l.q++ : cart.push({id, q: 1});
+  saveCart(); renderCart(); toast("Added to cart");
 }
-function renderGrid(){
-  const q = query.trim().toLowerCase();
-  const list = products.filter(p => (current==="All" || p.cat===current) && (!q || (p.name+" "+p.desc+" "+p.cat).toLowerCase().includes(q)));
-  $("#grid").innerHTML = list.length ? list.map(p=>`
-    <article class="card">
-      <div class="img-wrap"><div class="img" role="img" aria-label="${p.name}" style="${look(p)}"></div><span class="price">${money(p.price)}</span></div>
-      <span class="tag">${p.cat}</span><h3>${p.name}</h3><p>${p.desc}</p>
-      <button class="add" data-id="${p.id}">Add to cart</button>
-    </article>`).join("") : `<p class="none">Nothing matches that yet. Try another word, or ask us for a custom piece below.</p>`;
+function changeQty(id, d){
+  const l = cart.find(i => i.id === id); if(!l) return;
+  l.q += d; if(l.q <= 0) cart = cart.filter(i => i.id !== id);
+  saveCart(); renderCart();
 }
-$("#chips").onclick = e => { const c=e.target.closest(".chip"); if(!c) return; current=c.dataset.c; renderChips(); renderGrid(); };
-$("#q").oninput = e => { query = e.target.value; renderGrid(); };
-$("#grid").onclick = e => { const b=e.target.closest(".add"); if(b) add(+b.dataset.id); };
-
-/* cart */
-function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),1600); }
-function add(id){ const l=cart.find(i=>i.id===id); l ? l.q++ : cart.push({id,q:1}); save(); renderCart(); toast("Added to cart"); }
-function change(id,d){ const l=cart.find(i=>i.id===id); if(!l) return; l.q+=d; if(l.q<=0) cart=cart.filter(i=>i.id!==id); save(); renderCart(); }
-const lines = () => cart.map(l=>({p:products.find(p=>p.id===l.id),q:l.q})).filter(r=>r.p);
+function toast(t){
+  const el = $("#toast"); el.textContent = t; el.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 1600);
+}
+function orderText(){
+  const rows = priced();
+  if(!rows.length) return "Hi Craftycorner! I'd like to place an order.";
+  const total = rows.reduce((s, r) => s + r.p.price * r.q, 0);
+  return "Hi Craftycorner! I'd like to order:\n" +
+    rows.map(r => `• ${r.p.name} × ${r.q} = ${money(r.p.price * r.q)}`).join("\n") +
+    `\n\nTotal: ${money(total)}\nName & delivery address:`;
+}
 function renderCart(){
-  const rows = lines();
-  $("#count").textContent = rows.reduce((s,r)=>s+r.q,0);
-  $("#total").textContent = money(rows.reduce((s,r)=>s+r.p.price*r.q,0));
-  $("#items").innerHTML = rows.length ? rows.map(({p,q})=>`
+  const rows = priced();
+  $("#count").textContent = rows.reduce((s, r) => s + r.q, 0);
+  $("#total").textContent = money(rows.reduce((s, r) => s + r.p.price * r.q, 0));
+  $("#items").innerHTML = rows.length ? rows.map(({p, q}) => `
     <div class="row">
       <div class="th" style="${look(p)}"></div>
       <div class="nm">${p.name}<small>${money(p.price)} each</small></div>
       <div class="qty"><button data-d="-1" data-id="${p.id}" aria-label="Fewer">−</button>${q}<button data-d="1" data-id="${p.id}" aria-label="More">+</button></div>
     </div>`).join("") : `<div class="empty">Your cart is empty</div>`;
+  $("#checkout").href = wa(orderText());
+  $("#copyOrder").dataset.text = orderText();
 }
-$("#items").onclick = e => { const b=e.target.closest("button"); if(b) change(+b.dataset.id, +b.dataset.d); };
-const toggle = on => document.body.classList.toggle("open", on);
-$("#openCart").onclick = () => toggle(true);
-$("#closeCart").onclick = $("#veil").onclick = () => toggle(false);
-document.addEventListener("keydown", e => { if(e.key==="Escape") toggle(false); });
+function toggleCart(on){ document.body.classList.toggle("open", on); }
 
-function wa(msg){ return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`; }
-function orderText(){
-  const rows = lines();
-  if(!rows.length) return "";
-  const total = rows.reduce((s,r)=>s+r.p.price*r.q,0);
-  return "Hi Craftycorner! I'd like to order:\n" +
-    rows.map(r=>`• ${r.p.name} × ${r.q} = ${money(r.p.price*r.q)}`).join("\n") +
-    `\n\nTotal: ${money(total)}\nName & delivery address:`;
+/* ---------- views (one page, switched by the link's #anchor) ---------- */
+function viewFor(hash){
+  if(hash.startsWith("category-")) return {view:"category", slug:hash.slice(9)};
+  return {view: ["categories","how","about","contact"].includes(hash) ? hash : "home"};
 }
-function contactText(){ const f = new FormData($("#contactForm")); return `Hi Craftycorner! I'm ${f.get("name")} (${f.get("phone")}).\n${f.get("msg")}`; }
-async function copy(t){
-  try{ await navigator.clipboard.writeText(t); toast("Copied. Paste it in WhatsApp"); }
-  catch(e){
-    const ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
-    let ok=false; try{ ok=document.execCommand("copy"); }catch(_){} ta.remove();
-    toast(ok ? "Copied. Paste it in WhatsApp" : "Could not copy, please type your order");
+function showView(hash){
+  const {view, slug} = viewFor(hash);
+  document.querySelectorAll("[data-view]").forEach(s => s.hidden = s.dataset.view !== view);
+  document.querySelectorAll(".navlinks a").forEach(a => {
+    const on = a.dataset.nav === view;
+    on ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current");
+  });
+  if(view === "home"){ $("#homecats").innerHTML = CATS.map(catTile).join(""); renderGrid($("#featured"), PRODUCTS.filter(p => [1, 5, 9, 10].includes(p.id))); }
+  if(view === "categories"){ $("#catgrid").innerHTML = CATS.map(catTile).join(""); }
+  if(view === "category") renderCategory(slug);
+  if(view === "contact") refreshContact();
+  document.title = {home:"Craftycorner · Handmade candles, flowers & jewellery", categories:"Categories · Craftycorner", how:"How it works · Craftycorner", about:"About us · Craftycorner", contact:"Contact us · Craftycorner", category: "Category · Craftycorner"}[view];
+  document.body.classList.toggle("noir", ["home","categories","how"].includes(view));
+  window.scrollTo(0, 0);
+}
+let catQuery = "";
+function renderCategory(slug){
+  const cat = catOf(slug);
+  $("#cat-head").innerHTML = !cat
+    ? `<h1>Category not found</h1><p><a class="under" href="#categories">See all categories</a></p>`
+    : `<div class="crumbs"><a href="#home">Home</a> / <a href="#categories">Categories</a> / ${cat.name}</div>
+       <span class="kicker">category</span><h1>${cat.name}</h1><p>${cat.blurb}</p>`;
+  $("#tools").hidden = !cat;
+  if(!cat){ $("#grid").innerHTML = ""; $("#switch").innerHTML = ""; return; }
+  document.title = `${cat.name} · Craftycorner`;
+  $("#switch").innerHTML = CATS.map(c =>
+    `<a class="chip ${c.slug === slug ? "on" : ""}" href="#category-${c.slug}" ${c.slug === slug ? 'aria-current="page"' : ""}>${c.name}</a>`).join("");
+  $("#q").value = catQuery;
+  const q = catQuery.trim().toLowerCase();
+  renderGrid($("#grid"), PRODUCTS.filter(p => p.cat === slug && (!q || (p.name + " " + p.desc).toLowerCase().includes(q))));
+}
+function refreshContact(){
+  const name = $("#fname").value.trim(), phone = $("#fphone").value.trim(), msg = $("#fmsg").value.trim();
+  const t = `Hi Craftycorner! ${name ? "I'm " + name + ". " : ""}${phone ? "My number is " + phone + ". " : ""}\n\n${msg || "I'd like to ask about your products."}`;
+  $("#sendMsg").href = wa(t);
+  $("#copyMsg").dataset.text = t;
+}
+
+/* ---------- wiring ---------- */
+window.addEventListener("hashchange", () => showView(location.hash.replace("#", "")));
+$("#q").addEventListener("input", e => { catQuery = e.target.value; const h = location.hash.replace("#", ""); if(h.startsWith("category-")) renderCategory(h.slice(9)); });
+["#fname", "#fphone", "#fmsg"].forEach(s => $(s).addEventListener("input", refreshContact));
+
+document.addEventListener("click", e => {
+  const add = e.target.closest("button.add[data-id]");
+  if(add){ addToCart(+add.dataset.id); return; }
+  const qty = e.target.closest("#items button[data-id]");
+  if(qty){ changeQty(+qty.dataset.id, +qty.dataset.d); return; }
+  if(e.target.closest("#openCart")) toggleCart(true);
+  if(e.target.closest("#closeCart") || e.target.id === "veil") toggleCart(false);
+  const copy = e.target.closest("#copyOrder, #copyMsg");
+  if(copy){
+    const text = copy.dataset.text || "";
+    const label = copy.textContent;
+    const done = () => { copy.textContent = "copied ✓"; setTimeout(() => copy.textContent = label, 1500); };
+    try { navigator.clipboard.writeText(text).then(done, done); } catch(err){ done(); }
   }
-}
-$("#checkout").onclick = e => { const t=orderText(); if(!t){ e.preventDefault(); return toast("Your cart is empty"); } $("#checkout").href = wa(t); };
-$("#copyOrder").onclick = () => { const t=orderText(); t ? copy(t) : toast("Your cart is empty"); };
-$("#sendMsg").onclick = e => { if(!$("#contactForm").reportValidity()){ e.preventDefault(); return; } $("#sendMsg").href = wa(contactText()); };
-$("#copyMsg").onclick = () => { if($("#contactForm").reportValidity()) copy(contactText()); };
-$("#contactForm").onsubmit = e => e.preventDefault();
-document.querySelectorAll(".num").forEach(n => n.textContent = "+" + WHATSAPP.slice(0,2) + " " + WHATSAPP.slice(2));
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") toggleCart(false); });
 
+document.querySelectorAll(".num").forEach(el => el.textContent = waNumber);
 $("#yr").textContent = new Date().getFullYear();
-renderChips(); renderGrid(); renderCart();
-</script>
+$("#fwa").href = wa("Hi Craftycorner! I'd like to place an order.");
+renderCart();
+refreshContact();
+showView(location.hash.replace("#", ""));
 
-</body></html>
+</script>
