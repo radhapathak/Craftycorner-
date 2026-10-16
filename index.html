@@ -268,7 +268,8 @@
     --shadow:rgba(0,0,0,.75); --logo-blend:normal; --logo-bg:#fff;
     color-scheme:dark;
     background-color:var(--paper);
-    background-image:radial-gradient(ellipse at 50% -12%, rgba(226,99,74,.20), transparent 60%), var(--grain);
+    background-image:none;
+    --grain:none;
   }
   body.noir .kicker{color:var(--mustard)}
   body.noir .hero h1, body.noir h2{color:var(--ink)}
@@ -279,17 +280,54 @@
   body.noir .motto b{color:var(--mustard)}
   body.noir .step{background:#1d1813;outline:1px dashed #6b5540;outline-offset:-8px}
   body.noir .add,body.noir .btn{box-shadow:0 4px 0 #7a2a1d}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 4px}
+  .opt{display:grid;gap:4px;font-size:.85rem;color:var(--muted)}
+  .opt select{font:inherit;padding:8px 10px;border-radius:8px;background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+  .themes{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--paper)}
+  .themes span{font-size:.85rem;color:var(--muted);margin-right:4px}
+  .themes .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  body.theme-cream{
+    --paper:#f2e8d5; --paper-2:#e9dbc0; --card:#fbf5e8;
+    --ink:#2b221d; --muted:#6c5e51; --line:#cdb998;
+    --thread:#c4452f; --on-thread:#ffffff; --indigo:#2c3a5a; --on-indigo:#f6efe0;
+    --mustard:#d6a032; --on-mustard:#2b221d; --tape:rgba(214,160,50,.78);
+    --shadow:rgba(60,35,20,.35); --logo-blend:multiply; --logo-bg:transparent;
+    color-scheme:light;
+  }
+  body.theme-pink{
+    --paper:#fbe9ee; --paper-2:#f6d6df; --card:#fff5f8;
+    --ink:#4a2330; --muted:#8a5a68; --line:#e3a9b8;
+    --thread:#c2466a; --on-thread:#ffffff; --indigo:#7a3b52; --on-indigo:#fff5f8;
+    --mustard:#d9739a; --on-mustard:#3b1a25; --tape:rgba(217,115,154,.6);
+    --shadow:rgba(120,40,70,.3); --logo-blend:multiply; --logo-bg:transparent;
+    --grain:none; background-image:none; color-scheme:light;
+  }
+  body.theme-pink .motto{background:#4a2330;color:#fbe9ee}
+  body.theme-pink .motto b{color:#f6a6bf}
+  body.theme-cream .motto{background:#2b221d;color:#f2e8d5}
+  .themes .custom-pick{display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:var(--paper-2)}
+  .themes .custom-pick input{width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer}
+  .themes .custom-pick input::-webkit-color-swatch-wrapper{padding:0}
+  .themes .custom-pick input::-webkit-color-swatch{border:1.5px solid var(--line);border-radius:50%}
+  .themes .custom-pick[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .swatches{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .swatches .sl{width:100%;font-size:.85rem;color:var(--muted)}
+  .swatches .sl b{color:var(--ink)}
+  .swatches button{width:30px;height:30px;border-radius:50%;border:2px solid var(--card);background:var(--sw);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
+  .swatches button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+  .card::after{background:var(--pick,var(--thread))}
   @media (max-width:640px){.navlinks{gap:4px 12px;font-size:.92rem}.page-head{padding-block:40px 16px}}
 
 </style>
 <header class="top">
   <div class="wrap bar">
     <a href="#home" class="logo" aria-label="Craftycorner home"><img src="images/logo.jpg" alt="Craftycorner logo" width="84" height="84"></a>
-    <nav aria-label="Main" class="navlinks"><a href="#home" data-nav="home">Home</a><a href="#categories" data-nav="categories">Categories</a><a href="#how" data-nav="how">How it works</a><a href="#about" data-nav="about">About us</a><a href="#contact" data-nav="contact">Contact us</a></nav>
+    <nav aria-label="Main" class="navlinks"><a href="#home" data-nav="home">Home</a><a href="#shop" data-nav="shop">Shop</a><a href="#how" data-nav="how">How it works</a><a href="#about" data-nav="about">About us</a><a href="#contact" data-nav="contact">Contact us</a></nav>
     <button class="cart-btn" id="openCart" aria-label="Open cart">Cart <b id="count">0</b></button>
   </div>
 </header>
 <div class="motto">Order on WhatsApp <b>·</b> handmade by us <b>·</b> delivered to you</div>
+<div class="themes" role="group" aria-label="Colour theme"><span>Colour</span><button class="chip" data-theme="black">Black</button><button class="chip" data-theme="cream">Cream</button><button class="chip" data-theme="pink">Pink</button><label class="chip custom-pick" data-theme="custom">My colour <input type="color" id="customColour" value="#e2634a" aria-label="Pick your own theme colour"></label></div>
 <main>
 
 <section data-view="home" class="view">
@@ -307,15 +345,12 @@
     </div>
   </div></div>
 
-  <section style="padding-top:24px"><div class="wrap">
-    <div class="head"><span class="kicker">shop by category</span><h2>Find what you are looking for</h2></div>
-    <div id="homecats"></div>
+  <section id="shop" style="padding-top:24px"><div class="wrap">
+    <div class="head"><span class="kicker">the shop</span><h2>Pick a range, then order on WhatsApp</h2></div>
+    <div class="tools"><div class="chips" id="homechips" role="group" aria-label="Filter by category"></div></div>
+    <div class="grid" id="homegrid"></div>
   </div></section>
 
-  <section class="torn" style="padding-block:72px"><div class="wrap">
-    <div class="head"><span class="kicker">favourites</span><h2>Hung up and ready to take home</h2><p>Add what you like to your cart, then order on WhatsApp.</p></div>
-    <div class="grid" id="featured"></div>
-  </div></section>
 
   <section><div class="wrap"><div class="howbox">
     <span class="kicker">how it works</span>
@@ -325,18 +360,6 @@
   </div></div></section>
 </section>
 
-
-<section data-view="categories" class="view" hidden>
-  <div class="page-head"><div class="wrap">
-    <span class="kicker">the shop</span>
-    <h1>All categories</h1>
-    <p>Choose a range to see what is available. Anything you do not see, ask us on WhatsApp.</p>
-  </div></div>
-  <section style="padding-top:8px"><div class="wrap"><div id="catgrid"></div></div></section>
-  <section style="padding-top:28px"><div class="wrap" style="text-align:center">
-    <p>Want something that is not listed? <a class="under" href="#contact">Contact us</a>.</p>
-  </div></section>
-</section>
 
 
 <section data-view="category" class="view" hidden>
@@ -369,6 +392,19 @@
   <div class="howbox"><p>Want something made just for you? Tell us what you have in mind.</p>
     <a class="btn" href="#contact">Ask us on WhatsApp</a></div>
   </div></section>
+  <section style="padding-top:56px"><div class="wrap"><div class="prose">
+    <h2>Questions people ask</h2>
+    <h3 style="font-family:var(--display);font-weight:400;font-size:1.2rem;margin-top:22px">How long does a custom order take?</h3>
+    <p>Tell us what you need and the date. We reply on WhatsApp with a timeline before we start.</p>
+    <h3 style="font-family:var(--display);font-weight:400;font-size:1.2rem;margin-top:22px">Can I pay on WhatsApp?</h3>
+    <p>Yes. We confirm the total and send you payment details on WhatsApp before we make your order.</p>
+    <h3 style="font-family:var(--display);font-weight:400;font-size:1.2rem;margin-top:22px">Do you gift wrap?</h3>
+    <p>Yes. Tell us when you order and we will wrap it and add a note if you want one.</p>
+    <h3 style="font-family:var(--display);font-weight:400;font-size:1.2rem;margin-top:22px">Where do you deliver?</h3>
+    <p>Tell us your address on WhatsApp and we will confirm whether we can deliver there and the charge.</p>
+    <h3 style="font-family:var(--display);font-weight:400;font-size:1.2rem;margin-top:22px">Can you match my colours?</h3>
+    <p>Yes. Send us a photo or the colour names, and we will reply with what we can make.</p>
+  </div></div></section>
 </section>
 
 
@@ -377,6 +413,11 @@
     <span class="kicker">about us</span>
     <h1>Small batches, made by hand</h1>
   </div></div>
+  <section style="padding-top:8px"><div class="wrap"><div class="prose">
+    <h2>How we make it</h2>
+    <p>Every candle and bouquet is made at our table, by hand.</p>
+    <img src="images/make-process.png" alt="How we make candles and bouquets, in four steps each" width="1193" height="1318" style="width:100%;height:auto;margin:24px 0 0;border-radius:12px;box-shadow:0 14px 30px -18px var(--shadow)">
+  </div></div></section>
   <section style="padding-top:8px"><div class="wrap"><div class="prose">
     <p>Craftycorner makes handmade things in small batches: soy wax candles set with dried petals, everlasting flowers, jewellery, wedding pieces and pipe cleaner crafts.</p>
     <p>Every piece is made by hand, so no two are exactly the same. We would rather make a few things carefully than many things in a hurry.</p>
@@ -389,6 +430,9 @@
     </ul>
     <h2>How we work</h2>
     <p>You order on WhatsApp. We confirm the price and delivery time before we make anything, so there are no surprises. <a class="under" href="#how">See the steps</a>.</p>
+    <h2>Reviews</h2>
+    <p>Share how your order went. We read every review, and we share the kind ones here with permission.</p>
+    <p><a class="btn" target="_blank" rel="noopener" href="https://wa.me/919021400232?text=Hi%20Craftycorner!%20I%27d%20like%20to%20share%20a%20review%3A">Send your review on WhatsApp</a></p>
     <h2>Talk to us</h2>
     <p><a class="under" href="#contact">Contact us</a> any time, or message us on WhatsApp.</p>
   </div></div></section>
@@ -410,6 +454,9 @@
     <form id="contactForm" novalidate onsubmit="return false">
       <div><label for="fname">Your name</label><input id="fname" name="name" autocomplete="name"></div>
       <div><label for="fphone">Phone / WhatsApp</label><input id="fphone" name="phone" inputmode="tel" autocomplete="tel"></div>
+      <div><label for="ftype">What do you need?</label><select id="ftype" name="type"><option>Custom piece</option><option>Wedding favours</option><option>Bulk gift order</option><option>Colour match</option><option>Something else</option></select></div>
+      <div><label for="fqty">How many?</label><input id="fqty" name="qty" inputmode="numeric"></div>
+      <div><label for="fdate">When do you need it?</label><input id="fdate" name="date" placeholder="For example: 10 December"></div>
       <div><label for="fmsg">What would you like?</label><textarea id="fmsg" name="msg" placeholder="For example: 20 small rose candles for a wedding, in pale pink"></textarea></div>
       <a class="btn" id="sendMsg" target="_blank" rel="noopener">Send on WhatsApp</a>
       <p class="alt">If WhatsApp does not open, message <b class="num"></b> and <button type="button" id="copyMsg">copy this message</button> to paste.</p>
@@ -419,7 +466,7 @@
 
 </main>
 <footer><img class="foot-logo" src="images/logo.jpg" alt="" width="180" height="180"><div class="hand">thank you for supporting small makers</div>
-<nav class="foot-links"><a href="#categories">Categories</a><a href="#how">How it works</a><a href="#about">About us</a><a href="#contact">Contact us</a></nav>
+<nav class="foot-links"><a href="#shop">Shop</a><a href="#how">How it works</a><a href="#about">About us</a><a href="#contact">Contact us</a></nav>
 © <span id="yr"></span> Craftycorner</footer>
 <a class="fab" id="fwa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.4l-.7-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.7 11.5 11.5 0 0 0 4.4 3.9c2.1.9 2.5.7 3 .7a2.6 2.6 0 0 0 1.7-1.2 2 2 0 0 0 .2-1.2c0-.1-.2-.2-.4-.3z"/></svg>Order on WhatsApp</a>
 
@@ -457,14 +504,26 @@ const PRODUCTS = [
   {id:3, cat:"candles", name:"Bubble Cube Candle", desc:"Sculpted cream candle, a pretty shelf piece.", price:349, crop:[C,.91,.64,3.2]},
   {id:4, cat:"candles", name:"Scalloped Tea-light Candle", desc:"Flower-shaped candles in soft colours with dried petals and gold foil.", price:249, photo:"images/scalloped.jpg"},
   {id:5, cat:"flowers", name:"Pastel Bouquet in Vase", desc:"Roses and blossoms in a ribbed ceramic vase.", price:899, crop:[F,.22,.38,2.8]},
-  {id:6, cat:"flowers", name:"Sunflower Bunch", desc:"Bright sunflowers with filler flowers.", price:549, crop:[F,.47,.3,3.4]},
+  {id:6, cat:"flowers", name:"Sunflower Bunch", desc:"Bright sunflowers with filler flowers.", price:549, photo:"images/sunflower-bunch.png"},
   {id:7, cat:"flowers", name:"White Blossom Stems", desc:"Tall airy stems for a glass vase.", price:649, crop:[F,.75,.3,3]},
   {id:8, cat:"flowers", name:"Pink Dahlia Stems", desc:"Soft pink dahlias with green leaves.", price:399, crop:[F,.89,.74,3.4]},
   {id:9, cat:"pipe-cleaner", name:"Pipe Cleaner Candle Stand", desc:"Handmade pipe cleaner doll with a flower arch and pearl-trimmed tea-lights on a gold tray.", price:1499, photo:"images/candle-stand.jpg"},
   {id:10, cat:"jewellery", name:"Floral Necklace Set", desc:"Pink resin flower necklace with matching drop earrings, pearls and gold leaves.", price:1299, photo:"images/necklace-set.jpg"},
-  {id:11, cat:"jewellery", name:"Bridal Pearl Necklace", desc:"Pearls and a gold-tone chain, made to match your wedding colours.", price:null},
-  {id:12, cat:"jewellery", name:"Wedding Flower Earrings", desc:"Small floral drop earrings to go with bridal outfits.", price:null}
+  {id:11, cat:"jewellery", name:"Bridal Pearl Necklace", desc:"Pearls and a gold-tone chain, made to match your wedding colours.", price:null, photo:"images/bridal-pearl.png"},
+  {id:12, cat:"jewellery", name:"Wedding Flower Earrings", desc:"Small floral drop earrings to go with bridal outfits.", price:null, photo:"images/wedding-earrings.png"}
 ];
+
+/* Choices the customer picks before ordering. Edit these to match what you really offer. */
+const CAT_OPTIONS = {
+  "candles": [{label:"Scent", choices:["Rose","Chamomile","Unscented"]}, {label:"Colour", choices:["Pink","Cream","Gold"]}],
+  "flowers": [{label:"Colour", choices:["Pink","White","Yellow"]}, {label:"Size", choices:["Small","Medium","Large"]}],
+  "jewellery": [{label:"Colour", choices:["Pink","Pearl","Gold"]}],
+  "pipe-cleaner": [{label:"Colour", choices:["Pink","Orange","Mixed"]}]
+};
+
+/* Colour names used by the swatches on each card. */
+const COLOUR_HEX = {Pink:"#e8a0b4", Cream:"#f1e4c8", Gold:"#d4a24c", White:"#f7f4ee", Yellow:"#f2c94c",
+  Pearl:"#ece3d6", Orange:"#e87f3a", Mixed:"conic-gradient(#e8a0b4,#f2c94c,#e87f3a,#9bc49a,#e8a0b4)"};
 
 const $ = s => document.querySelector(s);
 const money = n => CURRENCY + n.toLocaleString("en-IN");
@@ -487,11 +546,18 @@ function card(p){
     ? `<div class="img" role="img" aria-label="${p.name}" style="${look(p)}"></div>`
     : `<div class="img ph" role="img" aria-label="${p.name}, photo coming soon"><span>Photo coming soon</span></div>`;
   const price = p.price == null ? "On request" : money(p.price);
+  const opts = (CAT_OPTIONS[p.cat] || []).map(o => o.label === "Colour"
+    ? `<div class="swatches" data-opt="Colour"><span class="sl">Colour: <b>${o.choices[0]}</b></span>${o.choices.map((c, i) =>
+        `<button type="button" title="${c}" aria-label="${c}" aria-pressed="${i === 0}" data-val="${c}" style="--sw:${COLOUR_HEX[c] || c}"></button>`).join("")}</div>`
+    : `<label class="opt">${o.label}<select data-opt="${o.label}">${o.choices.map(c => `<option>${c}</option>`).join("")}</select></label>`).join("");
+  const firstColour = (CAT_OPTIONS[p.cat] || []).find(o => o.label === "Colour");
+  const pick = firstColour ? `style="--pick:${COLOUR_HEX[firstColour.choices[0]] || firstColour.choices[0]}"` : "";
   const action = p.price == null
     ? `<a class="add" target="_blank" rel="noopener" href="${wa("Hi Craftycorner! I'd like to ask about: " + p.name)}">Ask on WhatsApp</a>`
     : `<button class="add" data-id="${p.id}">Add to cart</button>`;
-  return `<article class="card"><div class="img-wrap">${img}<span class="price">${price}</span></div>
-    <span class="tag">${catOf(p.cat).name}</span><h3>${p.name}</h3><p>${p.desc}</p>${action}</article>`;
+  return `<article class="card" ${pick}><div class="img-wrap">${img}<span class="price">${price}</span></div>
+    <span class="tag">${catOf(p.cat).name}</span><h3>${p.name}</h3><p>${p.desc}</p>
+    ${opts ? `<div class="opts">${opts}</div>` : ""}${action}</article>`;
 }
 function renderGrid(el, list){
   el.innerHTML = list.length ? list.map(card).join("")
@@ -507,17 +573,20 @@ function catTile(c){
 
 /* ---------- cart ---------- */
 let cart = [];
-try { cart = JSON.parse(localStorage.getItem("cc_cart")) || []; } catch(e){}
+try { cart = (JSON.parse(localStorage.getItem("cc_cart")) || []).map(l => ({id: l.id, q: l.q, sel: l.sel || {}})); } catch(e){}
+const keyOf = (id, sel) => id + "|" + Object.keys(sel).sort().map(k => k + "=" + sel[k]).join(";");
 function saveCart(){ try { localStorage.setItem("cc_cart", JSON.stringify(cart)); } catch(e){} }
-const priced = () => cart.map(l => ({p: PRODUCTS.find(p => p.id === l.id), q: l.q})).filter(r => r.p && r.p.price != null);
-function addToCart(id){
-  const l = cart.find(i => i.id === id);
-  l ? l.q++ : cart.push({id, q: 1});
+const priced = () => cart.map(l => ({line: l, p: PRODUCTS.find(p => p.id === l.id), q: l.q})).filter(r => r.p && r.p.price != null);
+const selText = sel => Object.keys(sel).map(k => k + ": " + sel[k]).join(", ");
+function addToCart(id, sel){
+  const k = keyOf(id, sel);
+  const l = cart.find(i => keyOf(i.id, i.sel) === k);
+  l ? l.q++ : cart.push({id, q: 1, sel});
   saveCart(); renderCart(); toast("Added to cart");
 }
-function changeQty(id, d){
-  const l = cart.find(i => i.id === id); if(!l) return;
-  l.q += d; if(l.q <= 0) cart = cart.filter(i => i.id !== id);
+function changeQty(k, d){
+  const l = cart.find(i => keyOf(i.id, i.sel) === k); if(!l) return;
+  l.q += d; if(l.q <= 0) cart = cart.filter(i => keyOf(i.id, i.sel) !== k);
   saveCart(); renderCart();
 }
 function toast(t){
@@ -529,19 +598,21 @@ function orderText(){
   if(!rows.length) return "Hi Craftycorner! I'd like to place an order.";
   const total = rows.reduce((s, r) => s + r.p.price * r.q, 0);
   return "Hi Craftycorner! I'd like to order:\n" +
-    rows.map(r => `• ${r.p.name} × ${r.q} = ${money(r.p.price * r.q)}`).join("\n") +
+    rows.map(r => `• ${r.p.name}${selText(r.line.sel) ? " (" + selText(r.line.sel) + ")" : ""} × ${r.q} = ${money(r.p.price * r.q)}`).join("\n") +
     `\n\nTotal: ${money(total)}\nName & delivery address:`;
 }
 function renderCart(){
   const rows = priced();
   $("#count").textContent = rows.reduce((s, r) => s + r.q, 0);
   $("#total").textContent = money(rows.reduce((s, r) => s + r.p.price * r.q, 0));
-  $("#items").innerHTML = rows.length ? rows.map(({p, q}) => `
-    <div class="row">
+  $("#items").innerHTML = rows.length ? rows.map(({p, q, line}) => {
+    const k = keyOf(line.id, line.sel);
+    return `<div class="row">
       <div class="th" style="${look(p)}"></div>
-      <div class="nm">${p.name}<small>${money(p.price)} each</small></div>
-      <div class="qty"><button data-d="-1" data-id="${p.id}" aria-label="Fewer">−</button>${q}<button data-d="1" data-id="${p.id}" aria-label="More">+</button></div>
-    </div>`).join("") : `<div class="empty">Your cart is empty</div>`;
+      <div class="nm">${p.name}<small>${selText(line.sel) ? selText(line.sel) + " · " : ""}${money(p.price)} each</small></div>
+      <div class="qty"><button data-d="-1" data-key="${k}" aria-label="Fewer">−</button>${q}<button data-d="1" data-key="${k}" aria-label="More">+</button></div>
+    </div>`;
+  }).join("") : `<div class="empty">Your cart is empty</div>`;
   $("#checkout").href = wa(orderText());
   $("#copyOrder").dataset.text = orderText();
 }
@@ -550,34 +621,41 @@ function toggleCart(on){ document.body.classList.toggle("open", on); }
 /* ---------- views (one page, switched by the link's #anchor) ---------- */
 function viewFor(hash){
   if(hash.startsWith("category-")) return {view:"category", slug:hash.slice(9)};
-  return {view: ["categories","how","about","contact"].includes(hash) ? hash : "home"};
+  if(hash === "shop") return {view:"home"};
+  return {view: ["how","about","contact"].includes(hash) ? hash : "home"};
 }
 function showView(hash){
   const {view, slug} = viewFor(hash);
   document.querySelectorAll("[data-view]").forEach(s => s.hidden = s.dataset.view !== view);
   document.querySelectorAll(".navlinks a").forEach(a => {
-    const on = a.dataset.nav === view;
+    const on = a.dataset.nav === (location.hash === "#shop" ? "shop" : view);
     on ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current");
   });
-  if(view === "home"){ $("#homecats").innerHTML = CATS.map(catTile).join(""); renderGrid($("#featured"), PRODUCTS.filter(p => [1, 5, 9, 10].includes(p.id))); }
-  if(view === "categories"){ $("#catgrid").innerHTML = CATS.map(catTile).join(""); }
+  if(view === "home"){ renderHome(); }
   if(view === "category") renderCategory(slug);
   if(view === "contact") refreshContact();
   document.title = {home:"Craftycorner · Handmade candles, flowers & jewellery", categories:"Categories · Craftycorner", how:"How it works · Craftycorner", about:"About us · Craftycorner", contact:"Contact us · Craftycorner", category: "Category · Craftycorner"}[view];
-  document.body.classList.toggle("noir", ["home","categories","how"].includes(view));
-  window.scrollTo(0, 0);
+
+  if(hash === "shop"){ document.getElementById("shop").scrollIntoView(); } else { window.scrollTo(0, 0); }
 }
+let homeCat = "all";
+function renderHome(){
+  const all = [{slug:"all", name:"All"}].concat(CATS);
+  $("#homechips").innerHTML = all.map(c => `<button class="chip ${c.slug === homeCat ? "on" : ""}" data-c="${c.slug}" aria-pressed="${c.slug === homeCat}">${c.name}</button>`).join("");
+  renderGrid($("#homegrid"), homeCat === "all" ? PRODUCTS : PRODUCTS.filter(p => p.cat === homeCat));
+}
+document.addEventListener("click", e => { const hc = e.target.closest("#homechips .chip"); if(hc){ homeCat = hc.dataset.c; renderHome(); } });
 let catQuery = "";
 function renderCategory(slug){
   const cat = catOf(slug);
   $("#cat-head").innerHTML = !cat
     ? `<h1>Category not found</h1><p><a class="under" href="#categories">See all categories</a></p>`
-    : `<div class="crumbs"><a href="#home">Home</a> / <a href="#categories">Categories</a> / ${cat.name}</div>
+    : `<div class="crumbs"><a href="#home">Home</a> / <a href="#shop">Shop</a> / ${cat.name}</div>
        <span class="kicker">category</span><h1>${cat.name}</h1><p>${cat.blurb}</p>`;
   $("#tools").hidden = !cat;
   if(!cat){ $("#grid").innerHTML = ""; $("#switch").innerHTML = ""; return; }
   document.title = `${cat.name} · Craftycorner`;
-  $("#switch").innerHTML = CATS.map(c =>
+  $("#switch").innerHTML = `<a class="chip" href="#shop">All</a>` + CATS.map(c =>
     `<a class="chip ${c.slug === slug ? "on" : ""}" href="#category-${c.slug}" ${c.slug === slug ? 'aria-current="page"' : ""}>${c.name}</a>`).join("");
   $("#q").value = catQuery;
   const q = catQuery.trim().toLowerCase();
@@ -585,7 +663,9 @@ function renderCategory(slug){
 }
 function refreshContact(){
   const name = $("#fname").value.trim(), phone = $("#fphone").value.trim(), msg = $("#fmsg").value.trim();
-  const t = `Hi Craftycorner! ${name ? "I'm " + name + ". " : ""}${phone ? "My number is " + phone + ". " : ""}\n\n${msg || "I'd like to ask about your products."}`;
+  const type = $("#ftype").value, qty = $("#fqty").value.trim(), date = $("#fdate").value.trim();
+  const details = [type, qty ? "quantity " + qty : "", date ? "needed by " + date : ""].filter(Boolean).join(", ");
+  const t = `Hi Craftycorner! ${name ? "I'm " + name + ". " : ""}${phone ? "My number is " + phone + ". " : ""}\nRequest: ${details}.\n\n${msg || "I'd like to ask about your products."}`;
   $("#sendMsg").href = wa(t);
   $("#copyMsg").dataset.text = t;
 }
@@ -593,13 +673,27 @@ function refreshContact(){
 /* ---------- wiring ---------- */
 window.addEventListener("hashchange", () => showView(location.hash.replace("#", "")));
 $("#q").addEventListener("input", e => { catQuery = e.target.value; const h = location.hash.replace("#", ""); if(h.startsWith("category-")) renderCategory(h.slice(9)); });
-["#fname", "#fphone", "#fmsg"].forEach(s => $(s).addEventListener("input", refreshContact));
+["#fname", "#fphone", "#fmsg", "#ftype", "#fqty", "#fdate"].forEach(s => $(s).addEventListener("input", refreshContact));
+$("#ftype").addEventListener("change", refreshContact);
 
 document.addEventListener("click", e => {
   const add = e.target.closest("button.add[data-id]");
-  if(add){ addToCart(+add.dataset.id); return; }
-  const qty = e.target.closest("#items button[data-id]");
-  if(qty){ changeQty(+qty.dataset.id, +qty.dataset.d); return; }
+  const swb = e.target.closest(".swatches button");
+  if(swb){
+    const g = swb.parentElement;
+    g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === swb));
+    g.querySelector("b").textContent = swb.dataset.val;
+    swb.closest(".card").style.setProperty("--pick", COLOUR_HEX[swb.dataset.val] || swb.dataset.val);
+    return;
+  }
+  if(add){
+    const sel = {}, card = add.closest(".card");
+    card.querySelectorAll("select[data-opt]").forEach(s => sel[s.dataset.opt] = s.value);
+    card.querySelectorAll(".swatches").forEach(g => { const on = g.querySelector('button[aria-pressed="true"]'); if(on) sel[g.dataset.opt] = on.dataset.val; });
+    addToCart(+add.dataset.id, sel); return;
+  }
+  const qty = e.target.closest("#items button[data-key]");
+  if(qty){ changeQty(qty.dataset.key, +qty.dataset.d); return; }
   if(e.target.closest("#openCart")) toggleCart(true);
   if(e.target.closest("#closeCart") || e.target.id === "veil") toggleCart(false);
   const copy = e.target.closest("#copyOrder, #copyMsg");
@@ -615,6 +709,35 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") toggleCart(fa
 document.querySelectorAll(".num").forEach(el => el.textContent = waNumber);
 $("#yr").textContent = new Date().getFullYear();
 $("#fwa").href = wa("Hi Craftycorner! I'd like to place an order.");
+/* ---------- colour themes ---------- */
+const THEMES = {black: "noir", cream: "theme-cream", pink: "theme-pink"};
+let baseTheme = "black", savedAccent = "#e2634a";
+try { baseTheme = localStorage.getItem("cc_base") || "black"; savedAccent = localStorage.getItem("cc_accent") || savedAccent; } catch(e){}
+if(!THEMES[baseTheme]) baseTheme = "black";
+const onColour = hex => { const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.299*r + 0.587*g + 0.114*b) > 150 ? "#1a0b06" : "#ffffff"; };
+function setAccent(hex){ const s = document.body.style; s.setProperty("--thread", hex); s.setProperty("--mustard", hex); s.setProperty("--on-thread", onColour(hex)); }
+function clearAccent(){ const s = document.body.style; ["--thread", "--mustard", "--on-thread"].forEach(v => s.removeProperty(v)); }
+function applyTheme(t){
+  const custom = t === "custom";
+  if(!custom){ if(!THEMES[t]) t = "black"; baseTheme = t; }
+  document.body.classList.remove("noir", "theme-cream", "theme-pink");
+  document.body.classList.add(THEMES[baseTheme]);
+  if(custom) setAccent(savedAccent); else clearAccent();
+  document.querySelectorAll("[data-theme]").forEach(b => b.setAttribute("aria-pressed", b.dataset.theme === t));
+  try { localStorage.setItem("cc_theme", t); localStorage.setItem("cc_base", baseTheme); } catch(e){}
+}
+document.addEventListener("click", e => { const t = e.target.closest(".themes [data-theme]"); if(t) applyTheme(t.dataset.theme); });
+document.addEventListener("input", e => {
+  if(e.target.id !== "customColour") return;
+  savedAccent = e.target.value;
+  try { localStorage.setItem("cc_accent", savedAccent); } catch(err){}
+  applyTheme("custom");
+});
+let savedTheme = "black";
+try { savedTheme = localStorage.getItem("cc_theme") || "black"; } catch(e){}
+$("#customColour").value = savedAccent;
+applyTheme(savedTheme);
 renderCart();
 refreshContact();
 showView(location.hash.replace("#", ""));
