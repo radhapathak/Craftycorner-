@@ -107,6 +107,11 @@ body.locked{overflow:hidden}
 <button class="btn" type="submit">Verify and continue</button>
 </form>
 </div>
+<form id="gname" hidden novalidate>
+<label for="gn">Your name</label>
+<input id="gn" autocomplete="name" maxlength="60" placeholder="e.g. Sneha Patak">
+<button class="btn" type="submit">Continue</button>
+</form>
 <div id="gmsg" class="fm" role="status"></div>
 <div id="grecap"></div>
 </div>
@@ -359,11 +364,21 @@ let CC_USER=null;
   const auth=firebase.auth(); let confirmRes=null, recap=null;
   const makeRecap=()=>{recap=new firebase.auth.RecaptchaVerifier(g("grecap"),{size:"invisible"})};
   makeRecap();
+  const showNameStep=u=>{
+    body.classList.add("locked");
+    g("gauth").hidden=true; g("gname").hidden=false; g("gmsg").textContent=""; g("gn").focus();
+    g("gname").onsubmit=async e=>{e.preventDefault();const n=g("gn").value.trim().replace(/\s+/g," ");
+      if(n.length<2){say("Please enter your name.",true);return}
+      try{await u.updateProfile({displayName:n});CC_USER=n;g("who").textContent=n;body.classList.remove("locked");
+        if(typeof route==="function")route()}catch(err){say(human(err),true)}};
+  };
   auth.onAuthStateChanged(u=>{
     CC_USER=u?(u.email||u.phoneNumber||u.displayName||"your account"):null;
     g("who").textContent=u?(u.displayName||u.phoneNumber||""):"";
-    body.classList.toggle("locked",!u);
-    if(u&&typeof route==="function")route();
+    if(!u){g("gauth").hidden=false;g("gname").hidden=true;g("gphone").hidden=false;g("gcode").hidden=true;body.classList.add("locked");return}
+    if(!u.displayName){showNameStep(u);return}
+    body.classList.remove("locked");
+    if(typeof route==="function")route();
   });
   g("ggoogle").onclick=async()=>{try{await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())}
     catch(e){if(e.code==="auth/popup-blocked")await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());else say(human(e),true)}};
